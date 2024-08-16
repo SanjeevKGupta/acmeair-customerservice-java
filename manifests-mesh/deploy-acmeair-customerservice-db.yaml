@@ -1,22 +1,4 @@
 ###### Customer Service DB ######
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    service: acmeair-customer-db
-  name: acmeair-customer-db
-spec:
-  ports:
-  - name: "27017"
-    port: 27017
-    protocol: TCP
-    targetPort: 27017
-  selector:
-    name: acmeair-customer-db
-status:
-  loadBalancer: {}
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -42,4 +24,19 @@ spec:
           protocol: TCP
         resources: {}
       restartPolicy: Always
-status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: acmeair-customer-db
+  name: acmeair-customer-db
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    name: acmeair-customer-db
